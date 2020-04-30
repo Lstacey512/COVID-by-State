@@ -9,9 +9,9 @@ const datesAreEqual = (left, right) => {
 //SETUP AND CHART OPTIONS
 let svg = d3.select("#chart").append("svg")
 .attr("width", 960)
-.attr("height", 800);
+.attr("height", 900);
 
-var height = 800;
+var height = 900;
 var width = 960;
 
 //Sets speed of animation  
@@ -143,7 +143,7 @@ let dateText = svg.append('text')
   .attr('x', width-margin.right)
   .attr('y', height-25)
   .style('text-anchor', 'end')
-  .html(date)
+  .html((date.getMonth()+1) + "/" + (date.getDate()) + "/" + date.getFullYear())
   // .call(halo, 10);
   
 let ticker = d3.interval(e => {
@@ -187,13 +187,13 @@ let ticker = d3.interval(e => {
       .attr('y', d => y(d.rank)+5);
       
     bars
-    .style('fill', d => d.color)
     .transition()
       .duration(tickDuration)
       .ease(d3.easeLinear)
       .attr('width', d => x(d.cases_per1K)-x(0)-1)
-      .attr('y', d => y(d.rank)+5);
-        
+      .attr('y', d => y(d.rank)+5)
+      .style('fill', d => d.color);
+      
     bars
     .exit()
     .transition()
@@ -244,20 +244,25 @@ let ticker = d3.interval(e => {
       .attr('class', 'valueLabel')
       .attr('x', d => x(d.cases_per1K)+5)
       .attr('y', d => y(top_n+1)+5)
+      .text(d => d3.format(',.2f')(d.previous_day_CPC))
       .transition()
         .duration(tickDuration)
         .ease(d3.easeLinear)
         .attr('y', d => y(d.rank)+5+((y(1)-y(0))/2)+1);
         
     valueLabels
-      .text(d => d.cases_per1K)
+      // .text(d => d.cases_per1K)
       .transition()
         .duration(tickDuration)
         .ease(d3.easeLinear)
         .attr('x', d => x(d.cases_per1K)+5)
         .attr('y', d => y(d.rank)+5+((y(1)-y(0))/2)+1)
         .tween("text", function(d) {
-          return d3.interpolateString(d.previous_day_CPC, d.cases_per1K)}); 
+          let i = d3.interpolateNumber(d.previous_day_CPC, d.cases_per1K);
+          return function(t) {
+            this.textContent = d3.format(',.2f')(i(t));
+          };
+        }); 
   
   valueLabels
     .exit()
@@ -268,11 +273,12 @@ let ticker = d3.interval(e => {
       .attr('y', d => y(top_n+1)+5)
       .remove();
 
-  dateText.html(date);
+  dateText.html((date.getMonth()+1) + "/" + (date.getDate()) + "/" + date.getFullYear());
   
   if(datesAreEqual(date, endDate)) ticker.stop();
     date.setDate(date.getDate()+1);
 
+   
     console.log(date);
 
     },tickDuration);
