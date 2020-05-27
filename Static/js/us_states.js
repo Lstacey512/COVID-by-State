@@ -14,7 +14,7 @@ var mapWidth = 800;
 var mapHeight = 400;
 var legendContent = ["Under statewide lockdown", "Not under statewide lockdown", "Cases per 1K residents"];
 var legendColor = ["rgb(237,60,67)", "lightgrey"];
-var bubbleGraphic = "../Assets/Visuals/Map_legend_bubbles.png"
+var bubbleGraphic = "Assets/Visuals/Map_legend_bubbles.png"
 
 var projection = d3.geoAlbersUsa().scale(800) // Sets zoom so that we can see the full map
     .translate([width / 2, height / 1.5]);
@@ -84,7 +84,7 @@ var maptip = d3.select("body")
     .style("opacity", 1);
 
 //---- Populate map with data---//
-d3.csv('../Assets/Data/states.csv').then(function (data) {
+d3.csv('Assets/Data/states.csv').then(function (data) {
 
     let date = new Date('2020-04-23T00:00:00');
 
@@ -125,8 +125,8 @@ d3.csv('../Assets/Data/states.csv').then(function (data) {
     //----- GET COORDINATES FROM GEOJSON FOR MAPPING--//
 
     // Load GeoJSON data and merge with states data
-    d3.json('../Assets/Data/us-states.json').then(function (json) {
-        d3.csv('../Assets/Data/states_lat_long.csv').then(function (states_data) {
+    d3.json('Assets/Data/us-states.json').then(function (json) {
+        d3.csv('Assets/Data/states_lat_long.csv').then(function (states_data) {
 
             //console.log(json);
 

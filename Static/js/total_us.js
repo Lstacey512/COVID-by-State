@@ -41,7 +41,7 @@ svg.append("text")
 let date = new Date ('2020-03-01T00:00:00');
 
 //CREATE CHART
-d3.csv('../Assets/Data/us.csv').then(function(data) {
+d3.csv('Assets/Data/us.csv').then(function(data) {
 
    // console.log(data)
   
