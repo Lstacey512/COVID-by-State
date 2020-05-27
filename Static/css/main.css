@@ -1,0 +1,170 @@
+body {
+    background-color: rgb(252,251,250);
+    padding: 5px 50px 0px 50px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.breaker {
+    width: 80%;
+    border: .5px solid rgb(237, 60, 67);
+    margin-right:0;
+
+}
+
+.bubble{
+    fill: rgb(255,192,0);
+    fill-opacity: 0.5;
+    stroke: rgb(237, 60, 67);
+    stroke-width: 1;
+}
+
+.cases{
+    text-align: left;
+    padding-left: 10px;
+}
+
+.chart-text{
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.datapoint{
+    fill: rgb(237, 60, 67);
+    fill-opacity: 30%;
+    stroke: rgb(237, 59, 65);
+    stroke-width: 1;
+
+}
+
+.instructional{
+    font-size: 12px;
+}
+
+.legend{
+    fill-opacity: 0;
+    stroke: grey;
+    stroke-width: 1;
+}
+
+.logo {
+    height: 35px;
+    width: auto;
+    margin: 0px 10px 0px 10px;
+}
+
+.main-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.maintitle{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-text{
+    font-size: 10px;
+    color: grey;
+}
+
+.navbar-sub-text{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: rgb(237, 60, 67);
+    font-size: 18px;
+}
+
+.nav-main-text{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: bold;
+    color: #ed3c43;
+    font-size: 24px;
+    margin-right: 100px;
+}
+
+.stat-base{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px;
+    color: grey;
+    margin-top: 0px;
+    ;
+
+}
+
+.subtitle{
+    font-size: 20px;
+}
+
+
+.state{
+    text-align: right;
+    padding-right:10px;
+}
+
+#state-timeline{
+    height: 300px;
+    width:100%;
+}
+
+.table-dummy{
+    background-color: rgb(237, 60, 67);
+    width:2px
+}
+
+tr{
+    background-color: rgb(240,240,240);
+}
+
+tr:nth-child(even) {
+    background-color: rgb(225,225,225);
+}
+
+table{
+    width:75%;
+    margin-left:20px;
+}
+
+.table-head{
+    background-color:rgb(252,251,250)
+}
+
+.table-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+}
+
+.text-stat{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 28px;
+    color: rgb(237, 59, 65);
+    font-weight: bold;
+    margin:0 0 0 0;
+
+}
+
+#tooltip{
+    width: 200px;
+    height: 100px; 
+    stroke: #cecece;
+    stroke-width:1;
+    fill-opacity:0;
+}
+
+.tooltip-map{
+    position: absolute;           
+	text-align: center;           
+	width: 100px;                  
+	height: auto;                 
+	padding: 2px;             
+	font: 12px sans-serif;        
+	background: white;   
+	border: 0px;      
+	border-radius: 8px;           
+	pointer-events: none;  
+}
+
+.tool-text{
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: tgrey;
+}

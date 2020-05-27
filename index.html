@@ -2,74 +2,113 @@
 <html lang="en">
 <head> 
     <meta charset="UTF-8">
-    <title>Stay in Place </title>
+    <title>CV19 Dashboard </title>
 
-    <!--Boostrap, in case I need it--> 
+    <!--Boostrap--> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
     integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!-- d3 -->
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="Static/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:bold&display=swap">
+
+    <!-- d3 & plotly libraries -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
-
-    <style>
-        text{
-          font-size: 16px;
-          font-family: Open Sans, sans-serif;
-        }
-        text.title{
-          font-size: 24px;
-          font-weight: 500;
-        }
-          text.subTitle{
-            font-weight: 500;
-            fill: #777777;
-          }
-          text.caption{
-            font-weight: 400;
-            font-size: 14px;
-            fill: #777777;
-          }
-          text.label{
-            font-weight: 600;
-          }
-        
-          text.valueLabel{
-           font-weight: 300;
-          }
-        
-          text.yearText{
-            font-size: 64px;
-            font-weight: 700;
-            opacity: 0.25;
-          }
-          .tick text {
-            fill: #777777;
-          }
-          .xAxis .tick:nth-child(2) text {
-            text-anchor: start;
-          }
-          .tick line {
-            shape-rendering: CrispEdges;
-            stroke: #dddddd;
-          }
-          .tick line.origin{
-            stroke: #aaaaaa;
-          }
-          path.domain{
-            display: none;
-          }
-      </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </head>
 
 <body>
-    <div id="chart" style="margin-left: 10px;"></div>
+    <!-- Navigation bar-->
+    <nav class="navbar navbar-expand-sm"> 
+        <div class="navbar-brand">
+            <img src="Assets/Visuals/Logo_img.png" width="35" height="35" class="d-inline-block align-top logo" alt="">
+            <span class="nav-main-text"> CV19</span>
+        </div>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+   
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link navbar-sub-text" href="#">Overview</a>
+            <a class="nav-item nav-link navbar-sub-text" href="#">Insights</a>
+            <a class="nav-item nav-link navbar-sub-text" href="#">Resources</a>
+          </div>
+        </div>
+
+        <span class="navbar-text"> Updated </br> April 29,2020 </span>
+    </nav>
+
+    <div style="display: flexbox; width:100%; justify-items: end;">
+      <hr class="breaker">
+  </div>
+
+  <div class="container" style="margin-top: 50px">
+    <div class="row">
+      <div class="col-4">
+        <p class="main-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas sed tempus urna et pharetra. Luctus venenatis lectus magna fringilla. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et. Enim ut tellus elementum sagittis vitae et leo duis ut. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Vulputate enim nulla aliquet porttitor. Mattis pellentesque id nibh tortor id aliquet lectus. Placerat duis ultricies lacus sed turpis. Tortor aliquam nulla facilisi cras fermentum odio eu. Vulputate eu scelerisque felis imperdiet proin. Adipiscing commodo elit at imperdiet dui accumsan sit. Amet dictum sit amet justo donec enim diam vulputate. Urna neque viverra justo nec ultrices dui sapien eget mi. Vivamus arcu felis bibendum ut tristique et egestas quis.
+        </p>
+      </div>
+
+      <div class="col-8">
+        <div id="totalUScases"></div>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="container" style="margin-top: 50px">
+    <div class="row">
+      <div class="col-3">
+        <p class="chart-text maintitle" style="margin-bottom:0">MOST AFFECTED STATES</p>
+        <p class="chart-text subtitle" style="margin-top:0.0">as of April 29,2020</p>
+        <table id="top-states"></table>
+      </div>
+
+      <div class="col-9">
+        <div id="US-map"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-8" id="state-timeline">
+      </div>
+
+      <div class="col-4" style="align-content: center;">
+        <div class="row" style="margin-top:50px;">
+            <div class="col-6">
+              <p  id= "cases" class="text-stat"></p>
+              <p class= "stat-base">Cases</p>
+            </div>
+            <div class="col-6">
+              <p  id= "casespercapita" class="text-stat"></p>
+              <p class= "stat-base">Cases per <br>1,000 residents</p>
+            </div>
+        </div>
+
+        <div class="row" style="align-content: center;">
+          <div class="col-12">
+            <p  id= "avgcases" class="text-stat"></p>
+            <p class= "stat-base">Average new cases per <br> day based on past week</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-
+  
+  
+    <!-- Chart scripts-->
+    <script src="Static/js/total_us.js"></script>
+    <script src="Static/js/us_states.js"></script>
+  </body>
     
-    <!-- javascript -->
-    <script src="bar_race.js"></script>
-</body>
-
-</html>
